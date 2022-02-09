@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Board from "../Board/board";
 import "./game.css";
 import { calculateWinner } from "../../Function/calculateWinner";
@@ -13,6 +13,19 @@ function Game() {
   const winner = calculateWinner(board);
   const [xWinCount, setXWinCount] = useState(0);
   const [oWinCount, setOWinCount] = useState(0);
+
+  useEffect(() => {
+    if (winner === "X") {
+      let newWinCountX = xWinCount;
+      setXWinCount(newWinCountX + 1);
+      return;
+    }
+    if (winner === "O") {
+      let newWinCountO = oWinCount;
+      setOWinCount(newWinCountO + 1);
+      return;
+    }
+  }, [board, winner]);
 
   //   function getTurn(value) {
   //     return value % 2 === 0 ? "O" : "X";
@@ -34,16 +47,8 @@ function Game() {
     console.log("a click has happened");
     // If user click an occupied square or if game is won, return
     if (winner || boardCopy[i]) {
-      console.log("this will only show up on a clicked square");
-      if (winner === "X") {
-        let newWinCountX = xWinCount;
-        setXWinCount(newWinCountX + 1);
-        return;
-      }
-      if (winner === "O") {
-        let newWinCountO = oWinCount;
-        setOWinCount(newWinCountO + 1);
-        return;
+      if (winner) {
+        console.log("game has been won");
       }
       return;
     }
@@ -56,6 +61,11 @@ function Game() {
   function restart() {
     setBoard(Array(9).fill(null));
     setXisNext(true);
+  }
+
+  function resetScores() {
+    setOWinCount(0);
+    setXWinCount(0);
   }
 
   return (
@@ -75,10 +85,11 @@ function Game() {
       </div>{" "}
       {/* End of results div */}
       {/* End of game div */}
-      <button onClick={restart}>Restart</button>
+      <button onClick={restart}>Clear board</button>
       <h2>Scores</h2>
       <p>X has won {xWinCount} times</p>
       <p>O has won {oWinCount} times</p>
+      <button onClick={resetScores}>Reset scores</button>
     </div>
   );
 }

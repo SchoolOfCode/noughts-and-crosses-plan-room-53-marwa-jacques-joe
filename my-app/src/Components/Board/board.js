@@ -5,8 +5,8 @@ import "./board.css";
 function Board({ squares, onClick }) {
   return (
     <div className="board">
-      {squares.map((square, i) => (
-        <Square key={i} value={square} onClick={() => onClick(i)} />
+      {squares.map((square, index) => (
+        <Square key={index} value={square} onClick={() => onClick(index)} />
       ))}
     </div>
   );

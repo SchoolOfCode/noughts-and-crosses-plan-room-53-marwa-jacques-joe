@@ -44,12 +44,9 @@ function Game() {
 
   function handleClick(i) {
     const boardCopy = [...board];
-    console.log("a click has happened");
+
     // If user click an occupied square or if game is won, return
     if (winner || boardCopy[i]) {
-      if (winner) {
-        console.log("game has been won");
-      }
       return;
     }
     // Put an X or an O in the clicked square
@@ -70,26 +67,27 @@ function Game() {
 
   return (
     <div className="game">
-      {" "}
       {/* Game div */}
       <h1>Tic-Tac-Toe</h1>
       <Board squares={board} onClick={handleClick} restart={restart} />
       <div>
-        {" "}
         {/* Results Div */}
         <p>
           {winner
             ? "Winner: " + winner
+            : !board.includes(null)
+            ? "Draw"
             : "Next Player: " + (xIsNext ? "X" : "O")}
         </p>
-      </div>{" "}
+      </div>
       {/* End of results div */}
-      {/* End of game div */}
+
       <button onClick={restart}>Clear board</button>
       <h2>Scores</h2>
       <p>X has won {xWinCount} times</p>
       <p>O has won {oWinCount} times</p>
       <button onClick={resetScores}>Reset scores</button>
+      {/* End of game div */}
     </div>
   );
 }

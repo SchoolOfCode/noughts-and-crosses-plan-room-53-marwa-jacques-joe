@@ -6,7 +6,7 @@
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  border: 1px white solid;
+  /* border: 1px white solid; */
 }
 
 div.board {

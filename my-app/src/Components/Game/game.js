@@ -13,6 +13,7 @@ function Game() {
   const winner = calculateWinner(board);
   const [xWinCount, setXWinCount] = useState(0);
   const [oWinCount, setOWinCount] = useState(0);
+  const [drawCount, setDrawCount] = useState(0);
 
   useEffect(() => {
     if (winner === "X") {
@@ -24,6 +25,11 @@ function Game() {
       let newWinCountO = oWinCount;
       setOWinCount(newWinCountO + 1);
       return;
+    }
+
+    if (!board.includes(null)) {
+      let newDrawCount = drawCount + 1;
+      setDrawCount(newDrawCount);
     }
   }, [board, winner]);
 
@@ -76,16 +82,17 @@ function Game() {
           {winner
             ? "Winner: " + winner
             : !board.includes(null)
-            ? "Draw"
-            : "Next Player: " + (xIsNext ? "X" : "O")}
+            ? "It's a draw!"
+            : "It is P  layer " + (xIsNext ? "X" : "O") + "'s turn!"}
         </p>
       </div>
       {/* End of results div */}
 
       <button onClick={restart}>Clear board</button>
       <h2>Scores</h2>
-      <p>X has won {xWinCount} times</p>
-      <p>O has won {oWinCount} times</p>
+      <p>Player X has won {xWinCount} times!</p>
+      <p>Player O has won {oWinCount} times!</p>
+      <p>There has been {drawCount} draw(s)!</p>
       <button onClick={resetScores}>Reset scores</button>
       {/* End of game div */}
     </div>

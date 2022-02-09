@@ -83,7 +83,7 @@ function Game() {
             ? "Winner: " + winner
             : !board.includes(null)
             ? "It's a draw!"
-            : "It is P  layer " + (xIsNext ? "X" : "O") + "'s turn!"}
+            : "It is Player " + (xIsNext ? "X" : "O") + "'s turn!"}
         </p>
       </div>
       {/* End of results div */}
